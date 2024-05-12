@@ -113,7 +113,7 @@ function RegisterForm() {
                         <button onClick={handleSubmit} type="submit">REGISTER</button>
                     </form>
                 </div>
-                <pre>{JSON.stringify(data, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
             </div>
         </>
     )
