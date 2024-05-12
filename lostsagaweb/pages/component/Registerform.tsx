@@ -18,7 +18,7 @@ function RegisterForm() {
         })
     }
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async(e:any) => {
         e.preventDefault();
 
         // Check name and username
@@ -41,12 +41,30 @@ function RegisterForm() {
 
         // Check email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
-            alert('Invalid email format');
-            return;
-        }
+            if (!emailRegex.test(data.email)) {
+                alert('Invalid email format');
+                return;
+            }
 
-        alert('Registration successful');
+            try {
+                const response = await fetch('/api/chackemail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: data.email })
+                });
+
+                if (response.ok) {
+                    alert('Email is available');
+                } else {
+                    alert('Email is already registered');
+                }
+            } catch (error) {
+                console.error('Error checking email:', error);
+                alert('An error occurred while checking email');
+            }
+        
     }
 
 
