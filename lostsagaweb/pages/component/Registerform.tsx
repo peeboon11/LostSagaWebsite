@@ -11,14 +11,14 @@ function RegisterForm() {
         email: ''
     })
 
-    const handleChange = (e:any) => {
+    const handleChange = (e: any) => {
         setData({
             ...data,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmit = async(e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         // Check name and username
@@ -41,31 +41,44 @@ function RegisterForm() {
 
         // Check email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                alert('Invalid email format');
-                return;
-            }
+        if (!emailRegex.test(data.email)) {
+            alert('Invalid email format');
+            return;
+        }
 
-            try {
-                const response = await fetch('/api/chackemail', {
+        try {
+            const response = await fetch('/api/chackemail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: data.email })
+            });
+            if (response.ok) {
+                const response = await fetch('/api/sentregister', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: data.email })
+                    body: JSON.stringify({ 
+                        name: data.name,
+                        username: data.username,
+                        password: data.password,
+                        email: data.email })
                 });
-                console.log(response);
-                
                 if (response.ok) {
-                    alert('Email is available');
+                    alert('Register successfully');
                 } else {
-                    alert('Email นี้เคยถูกสมัครไปแล้ว');
+                    alert('เกิดข้อผิดพลาดในการสมัครสมาชิก กรุณาลองใหม่อีกครั้ง');
                 }
-            } catch (error) {
-                console.error('Error checking email:', error);
-                alert('An error occurred while checking email');
+            } else {
+                alert('Email นี้เคยถูกสมัครไปแล้ว');
             }
-        
+        } catch (error) {
+            console.error('Error checking email:', error);
+            alert('An error occurred while checking email');
+        }
+
     }
 
 
@@ -100,7 +113,7 @@ function RegisterForm() {
                         <button onClick={handleSubmit} type="submit">REGISTER</button>
                     </form>
                 </div>
-                <pre>{JSON.stringify(data,null,2)}</pre>
+                <pre>{JSON.stringify(data, null, 2)}</pre>
             </div>
         </>
     )
