@@ -21,15 +21,24 @@ const config = {
 
 export default async function handler(req:any, res:any) {
   
-  try {
-    await sql.connect(config);
-    const result = await sql.query`SELECT * FROM LosaGame.dbo.userMemberDB`;
-    console.log(result.recordset.map((user: any) => user.email));
-    const resultdata = result.recordset.map((user: any) => user.email);
-    res.status(200).json({ message: "API GET 100% completed successfully" });
-    return resultdata;
-  } catch (err) {
-    console.error('Error executing query:', err);
-    res.status(500).json({ error: 'Internal server error' });
+  if (req.method === 'POST') {
+    const { email } = req.body;
+
+    try {
+      await sql.connect(config);
+      const result = await sql.query`SELECT * FROM LosaGame.dbo.userMemberDB WHERE email = ${email}`;
+      console.log(result.recordset.map((user: any) => user.email));
+      const resultdata = result.recordset.map((user: any) => user.email);
+      console.log(resultdata.length + ' Email exists');
+
+      if (resultdata.length === 0) {
+        res.status(200).json({ message: "Email สามารถใช้ได้" });
+      } else {
+        res.status(400).json({ error: "Email นี้ถูกใช้ไปแล้ว" });
+      }
+    } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 }

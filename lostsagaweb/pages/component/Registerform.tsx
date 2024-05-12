@@ -54,11 +54,12 @@ function RegisterForm() {
                     },
                     body: JSON.stringify({ email: data.email })
                 });
-
+                console.log(response);
+                
                 if (response.ok) {
                     alert('Email is available');
                 } else {
-                    alert('Email is already registered');
+                    alert('Email นี้เคยถูกสมัครไปแล้ว');
                 }
             } catch (error) {
                 console.error('Error checking email:', error);
