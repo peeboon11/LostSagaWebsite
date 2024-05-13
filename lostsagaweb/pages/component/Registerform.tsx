@@ -1,6 +1,7 @@
 import React from 'react'
 import style from '../../styles/RegisterForm.module.css'
 import { useState } from 'react'
+import wallpaper from '../../public/237.png'
 
 function RegisterForm() {
     const [data, setData] = useState({
@@ -127,7 +128,8 @@ function RegisterForm() {
 
 
     return (
-        <>
+        <div className={style.backG}>
+            <img src={wallpaper.src} alt="" className={style.wallpaper} />
             <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'></link>
             <div className={style.main}>
                 <div className={style.boxfrom}>
@@ -159,7 +161,7 @@ function RegisterForm() {
                 </div>
                 {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
             </div>
-        </>
+        </div>
     )
 }
 
