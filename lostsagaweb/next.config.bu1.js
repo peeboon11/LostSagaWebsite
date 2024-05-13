@@ -2,8 +2,10 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
+
+
 const nextConfig = {
-  reactStrictMode: true,
+  output: "export",
   env: {
     DB_USER: process.env.DB_USER,
     DB_PASSWORD: process.env.DB_PASSWORD,
@@ -14,4 +16,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;
+module.exports = nextConfig;
