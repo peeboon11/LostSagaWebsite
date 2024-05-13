@@ -13,7 +13,6 @@ function index() {
       </Head>
       <Nevbar />
       <Information />
-      <News />
     </div>
 
   )

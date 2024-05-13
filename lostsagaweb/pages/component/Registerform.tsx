@@ -22,14 +22,58 @@ function RegisterForm() {
         e.preventDefault();
 
         // Check name and username
+
+        const checkNameAndUsername = () => {
+            const thaiRegex = /[ก-๙]/;
+            if (thaiRegex.test(data.name) || thaiRegex.test(data.username) || thaiRegex.test(data.password) || thaiRegex.test(data.email)){
+                alert('ชื่อในเกม, Username, Password, Email ไม่สามารถใช้ภาษาไทยได้');
+                return;
+            }
+        }
+
+        checkNameAndUsername();
+
+
         if (data.name.includes('[GM]') || data.username.includes('[GM]')) {
-            alert('Name and username cannot contain [GM]');
+            alert('ชื่อในเกม หรือ username ห้ามใช้ [GM] อยู่ในชื่อ');
+            return;
+        }
+
+        if (data.name.length < 3) {
+            alert('ชื่อในเกม ขั้นต่ำ 3 ตัวอักษร');
+            return;
+        }
+
+        if (data.name.length > 10) {
+            alert('ชื่อในเกม ได้สูงสุด 10 ตัวอักษร');
+            return;
+        }
+
+
+        if (data.username.length < 4) {
+            alert('Username ขั้นต่ำ 4 ตัวอักษร');
+            return;
+        }
+
+        if (data.name.length > 12) {
+            alert('Username ได้สูงสุด 12 ตัวอักษร');
             return;
         }
 
         // Check password
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+        if (specialCharRegex.test(data.password)) {
+            alert('Password ไม่สามารถใช้อักษรพิเศษได้');
+            return;
+        }
+
         if (data.password.length < 6) {
-            alert('Password must be at least 6 characters long');
+            alert('Password ต้องมีขั้นต่ำ 6 หลัก');
+            return;
+        }
+
+        if (data.password.length > 12) {
+            alert('Password สูงสุด 12 หลัก');
             return;
         }
 
@@ -67,7 +111,7 @@ function RegisterForm() {
                         email: data.email })
                 });
                 if (response.ok) {
-                    alert('Register successfully');
+                    alert('สมัครสมาชิก สำเร็จแล้ว');
                 } else {
                     alert('เกิดข้อผิดพลาดในการสมัครสมาชิก กรุณาลองใหม่อีกครั้ง');
                 }

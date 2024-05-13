@@ -26,11 +26,6 @@ function Nevbar() {
                                 HOME
                             </div>
                         </Link>
-                        <Link href="/" className={style.defaultbtn}>
-                            <div>
-                                NEWS
-                            </div>
-                        </Link>
                         <Link href="https://discord.gg/DUrCkHs2m6" className={style.defaultbtn}>
                             <div>
                                 DISCORD
@@ -42,11 +37,11 @@ function Nevbar() {
                                 REGISTER
                             </div>
                         </Link>
-                        <Link href="https://drive.google.com/file/d/1nyOGPkI5doLNrEZrYbI1MneEDG_n5m0G/view?usp=sharing">
+                        {/* <Link href="https://drive.google.com/file/d/1nyOGPkI5doLNrEZrYbI1MneEDG_n5m0G/view?usp=sharing">
                             <div className={style.downloadbtnleft}>
                                 DOWNLOAD
                             </div>
-                        </Link>
+                        </Link> */}
                     </div>
                     <div className={style.linkright}>
                         <Link href="/Register" className={style.registerbtn}>
@@ -54,11 +49,11 @@ function Nevbar() {
                                 REGISTER
                             </div>
                         </Link>
-                        <Link href="https://drive.google.com/file/d/1nyOGPkI5doLNrEZrYbI1MneEDG_n5m0G/view?usp=sharing">
+                        {/* <Link href="https://drive.google.com/file/d/1nyOGPkI5doLNrEZrYbI1MneEDG_n5m0G/view?usp=sharing">
                             <div className={style.downloadbtn}>
                                 DOWNLOAD
                             </div>
-                        </Link>
+                        </Link> */}
                     </div>
 
                 </div>
